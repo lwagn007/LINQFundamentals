@@ -10,24 +10,61 @@ namespace Features
     {
         static void Main(string[] args)
         {
-            IEnumerable<Employee> developers = new Employee[]
+            //delegate type
+            Func<int, int> square = x => x * x;
+            Func<int, int, int> add = (x, y) => {
+                int temp = x + y;
+                return temp;
+            };
+
+            //always returns void
+            Action<int> write = x => Console.WriteLine(x);
+            //utilizing the write action
+            write(square(add(3,5)));
+
+            //IEnumerable<Employee> can use var for implicit typing 
+            var developers = new Employee[]
             {
                 new Employee{ EmployeeId = 1, EmployeeName = "Scott" },
                 new Employee{ EmployeeId = 2, EmployeeName = "Chris"}
             };
 
-            IEnumerable<Employee> sales = new List<Employee>()
+            //IEnumerable<Employee> can use var for implicit typing
+            var sales = new List<Employee>()
             {
                 new Employee{ EmployeeId = 3, EmployeeName = "Alex" }
             };
 
-            Console.WriteLine(sales.Count());
-            //Without LINQ                      //can switch to sales here and still work due to IEnumerator
-            IEnumerator<Employee> enumerator = developers.GetEnumerator();
-            while (enumerator.MoveNext())
+            //Method syntax
+            var query = developers.Where(e => e.EmployeeName.Length == 5)
+                .OrderByDescending(e => e.EmployeeName)
+                .Select(e => e).Count();
+
+            //Query syntax
+            var queryTwo = from developer in developers
+                           where developer.EmployeeName.Length == 5
+                           orderby developer.EmployeeName descending
+                           select developer;
+
+            foreach (var employee in queryTwo)
             {
-                Console.WriteLine(enumerator.Current.EmployeeName);
+                Console.WriteLine(employee.EmployeeName);
             }
+
+            //foreach(var employee in developers
+            //    .Where(e => e.EmployeeName
+            //    .StartsWith("S")))
+            //{
+            //    Console.WriteLine(employee.EmployeeName);
+            //}
+
+            //Console.WriteLine(sales.Count());
+            ////Without LINQ                      //can switch to sales here and still work due to IEnumerator
+            //IEnumerator<Employee> enumerator = developers.GetEnumerator();
+            //while (enumerator.MoveNext())
+            //{
+            //    Console.WriteLine(enumerator.Current.EmployeeName);
+            //}
 
             //Both an array and lists implent IEnumerable<T> which allows us to use the below for both collections
             //foreach(var person in developers)
