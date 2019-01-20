@@ -50,27 +50,6 @@ namespace Features
             {
                 Console.WriteLine(employee.EmployeeName);
             }
-
-            //foreach(var employee in developers
-            //    .Where(e => e.EmployeeName
-            //    .StartsWith("S")))
-            //{
-            //    Console.WriteLine(employee.EmployeeName);
-            //}
-
-            //Console.WriteLine(sales.Count());
-            ////Without LINQ                      //can switch to sales here and still work due to IEnumerator
-            //IEnumerator<Employee> enumerator = developers.GetEnumerator();
-            //while (enumerator.MoveNext())
-            //{
-            //    Console.WriteLine(enumerator.Current.EmployeeName);
-            //}
-
-            //Both an array and lists implent IEnumerable<T> which allows us to use the below for both collections
-            //foreach(var person in developers)
-            //{
-            //    Console.WriteLine(person.EmployeeName);
-            //}
         }
     }
 }
