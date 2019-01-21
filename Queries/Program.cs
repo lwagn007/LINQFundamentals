@@ -18,8 +18,8 @@ namespace Queries
                 new Movie { Title = "Star Wars V", Rating = 8.7f, Year = 1980 }
             };
 
-            var query = movies.Filter(m => m.Year >= 2000).ToList();
-
+             var query = movies.Filter(m => m.Year >= 2000).ToList();
+            
             Console.WriteLine(query.Count());
 
             var enumerator = query.GetEnumerator();
